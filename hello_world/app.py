@@ -97,7 +97,7 @@ def get_user(user_id: str):
 @app.get("/api/get_paper")
 def get_user(paper_id: str):
 
-    get_resp = user_table.get_item(Key={"paper_id": paper_id})
+    get_resp = paper_table.get_item(Key={"paper_id": paper_id})
     if get_resp["ResponseMetadata"]["HTTPStatusCode"] != 200:
         return {"ok": False, "user": {}}
 
