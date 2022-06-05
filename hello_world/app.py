@@ -82,6 +82,30 @@ def create_paper(Paper: PaperModel):
     return {"ok": True}
 
 
+@app.get("/api/get_user")
+def get_user(user_id: str):
+
+    get_resp = user_table.get_item(Key={"user_id": user_id})
+    if get_resp["ResponseMetadata"]["HTTPStatusCode"] != 200:
+        return {"ok": False, "user": {}}
+
+    user = get_resp["Item"]
+
+    return {"ok": True, "user": user}
+
+
+@app.get("/api/get_paper")
+def get_user(paper_id: str):
+
+    get_resp = user_table.get_item(Key={"paper_id": paper_id})
+    if get_resp["ResponseMetadata"]["HTTPStatusCode"] != 200:
+        return {"ok": False, "user": {}}
+
+    paper = get_resp["Item"]
+
+    return {"ok": True, "paper": paper}
+
+
 lambda_handler = Mangum(app, lifespan="off")
 
 # import requests
